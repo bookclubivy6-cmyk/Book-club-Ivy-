@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valoración de Servicio | Book Club Ivy</title>
+    <style>
+        :root {
+            --ivy-purple: #6c5ce7; /* Morado vibrante */
+            --ivy-dark-purple: #4834d4;
+            --ivy-light: #f3f0ff;
+            --ivy-text: #2d3436;
+            --gold: #f1c40f;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f9f8ff;
+            color: var(--ivy-text);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- Header Profesional --- */
+        header {
+            background: white;
+            padding: 50px 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--ivy-purple);
+        }
+
+        .profile-pic {
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(135deg, var(--ivy-purple), var(--ivy-dark-purple));
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            box-shadow: 0 10px 25px rgba(108, 92, 231, 0.3);
+        }
+
+        .rating-summary {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 25px;
+        }
+
+        .stat-box { text-align: center; }
+        .stat-number { font-size: 1.6rem; font-weight: bold; color: var(--ivy-purple); display: block; }
+        .stars-global { color: var(--gold); font-size: 1.2rem; }
+
+        /* --- Contenedor --- */
+        .container {
+            max-width: 750px;
+            margin: -30px auto 50px;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        h2 { color: var(--ivy-dark-purple); margin-top: 0; font-size: 1.5rem; }
+
+        /* --- Formulario --- */
+        label { display: block; margin: 15px 0 5px; font-weight: 600; color: #555; }
+        input, textarea, select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: all 0.3s;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--ivy-purple);
+            background-color: var(--ivy-light);
+        }
+
+        .submit-btn {
+            background: var(--ivy-purple);
+            color: white;
+            border: none;
+            padding: 16px;
+            width: 100%;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: background 0.3s;
+        }
+        .submit-btn:hover { background: var(--ivy-dark-purple); }
+
+        /* --- Lista de Reseñas --- */
+        .review-item {
+            padding: 25px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .review-item:last-child { border: none; }
+        .review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .client-name { font-weight: 700; font-size: 1.1rem; }
+        .stars-item { color: var(--gold); }
+        .review-text { color: #636e72; font-style: italic; margin: 0; }
+
+        /* --- Botón WhatsApp Flotante --- */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366; /* Color oficial WhatsApp */
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-decoration: none;
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+        .whatsapp-btn:hover { transform: scale(1.1); }
+
+    </style>
+</head>
+<body>
+
+    <a href="https://wa.me/TUNUMERO" class="whatsapp-btn" target="_blank">
+        <span style="font-weight: bold;">W</span>
+    </a>
+
+    <header>
+        <div class="profile-pic">📖</div>
+        <h1>Book Club Ivy</h1>
+        <p>Tu opinión es fundamental para seguir creciendo.</p>
+        
+        <div class="rating-summary">
+            <div class="stat-box">
+                <span class="stat-number">5.0 / 5</span>
+                <span class="stars-global">★★★★★</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number">Satisfacción</span>
+                <span style="color: var(--ivy-purple); font-weight: bold;">Garantizada</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <div class="card">
+            <h2>Calificar Servicio</h2>
+            <form id="ivyForm">
+                <label>Tu Nombre</label>
+                <input type="text" id="name" placeholder="Ej. Alejandra M." required>
+                
+                <label>Valoración</label>
+                <select id="rating">
+                    <option value="5">⭐⭐⭐⭐⭐ Excelente</option>
+                    <option value="4">⭐⭐⭐⭐ Muy bueno</option>
+                    <option value="3">⭐⭐⭐ Bueno</option>
+                    <option value="2">⭐⭐ Regular</option>
+                    <option value="1">⭐ Deficiente</option>
+                </select>
+
+                <label>Comentarios sobre mi trabajo</label>
+                <textarea id="comment" rows="4" placeholder="¿Qué fue lo que más te gustó de trabajar con Book Club Ivy?" required></textarea>
+
+                <button type="submit" class="submit-btn">Publicar Valoración</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Lo que dicen los clientes</h2>
+            <div id="list">
+                <div class="review-item">
+                    <div class="review-header">
+                        <span class="client-name">Editorial Lumina</span>
+                        <span class="stars-item">★★★★★</span>
+                    </div>
+                    <p class="review-text">"Increíble trato y selección literaria. Un servicio de 10."</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const form = document.getElementById('ivyForm');
+        const list = document.getElementById('list');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const rating = document.getElementById('rating').value;
+            const comment = document.getElementById('comment').value;
+
+            const starString = "★".repeat(rating) + "☆".repeat(5 - rating);
+
+            const div = document.createElement('div');
+            div.className = 'review-item';
+            div.innerHTML = `
+                <div class="review-header">
+                    <span class="client-name">${name}</span>
+                    <span class="stars-item">${starString}</span>
+                </div>
+                <p class="review-text">"${comment}"</p>
+            `;
+
+            list.prepend(div);
+            form.reset();
+            alert('¡Gracias por tu valoración!');
+        });
+    </script>
+
+</body>
+</html>
